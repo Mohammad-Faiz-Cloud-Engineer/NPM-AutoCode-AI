@@ -12,6 +12,10 @@ Install the app:
 
 **Note:** Requires Ollama with models `codellama:7b-instruct` and `qwen2.5-coder:7b`. Run `ollama pull` for them.
 
+## Workflow:-
+
+![Workflow](https://ibb.co/nMSPNJ5h)
+
 ## 📖 Project Overview
 NPM AutoCode AI is a Python desktop app for automatic code generation and execution using AI. Describe tasks in plain English, and it uses NPMAI (custom LLM tools) to create, validate, and run Python scripts safely.
 
