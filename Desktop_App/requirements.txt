@@ -3,3 +3,4 @@ langchain
 langchain-core
 langchain-community
 npmai
+npmai-agents
