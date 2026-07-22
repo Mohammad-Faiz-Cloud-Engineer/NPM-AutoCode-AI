@@ -893,6 +893,10 @@ QPushButton:hover{{background:rgba(42,255,160,22);border-color:rgba(42,255,160,1
         self._log_box.verticalScrollBar().setValue(self._log_box.verticalScrollBar().maximum())
 
     def _voice_input(self):
+        """If you are working with voice input kindly read the documentation of npmai_agents and this code uses
+        npmai_agents version 1.0.2, npmai_agents change frequently although not syntax but it will be better to read
+        before making any change."""
+        """ old VoiceTool.listen(): SpeechAITool.transcribe_realtime """
         from npmai_agents.Tools_security_ai import SpeechAITool
         r = SpeechAITool.transcribe_realtime(duration=5)
         if r.success and r.data:

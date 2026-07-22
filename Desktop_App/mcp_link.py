@@ -7,23 +7,18 @@ from pathlib import Path
 from typing import Callable, Optional
 
 CONFIG_PATH = Path.home() / ".npmai_agent" / "supabase_config.json"
-BUNDLED_CONFIG_PATH = Path(__file__).resolve().parent / "app_config.json"
 
 
 CONFIG_URL = "https://raw.githubusercontent.com/npmaiecosystem/NPM-AutoCode-AI/refs/heads/main/Desktop_App/app_config.json"
 
 def load_config() -> dict:
-    """Load config from user override, then bundled file, then GitHub, then empty."""
-    if CONFIG_PATH.exists():
+    """Fetch latest config from GitHub (primary), fall back to bundled file."""
+    bundled = Path(__file__).resolve().parent / "app_config.json"
+    if bundled.exists():
         try:
-            return json.loads(CONFIG_PATH.read_text())
-        except Exception as e:
-            print(f"Failed to read local config: {e}")
-    if BUNDLED_CONFIG_PATH.exists():
-        try:
-            return json.loads(BUNDLED_CONFIG_PATH.read_text())
-        except Exception as e:
-            print(f"Failed to read bundled config: {e}")
+            return json.loads(bundled.read_text())
+        except Exception:
+            pass
     try:
         response = requests.get(CONFIG_URL, timeout=8)
         if response.status_code == 200:
