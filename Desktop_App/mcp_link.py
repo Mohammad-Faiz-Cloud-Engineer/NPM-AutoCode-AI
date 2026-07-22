@@ -13,18 +13,18 @@ CONFIG_URL = "https://raw.githubusercontent.com/npmaiecosystem/NPM-AutoCode-AI/r
 
 def load_config() -> dict:
     """Fetch latest config from GitHub (primary), fall back to bundled file."""
-    bundled = Path(__file__).resolve().parent / "app_config.json"
-    if bundled.exists():
-        try:
-            return json.loads(bundled.read_text())
-        except Exception:
-            pass
     try:
         response = requests.get(CONFIG_URL, timeout=8)
         if response.status_code == 200:
             return response.json()
     except Exception as e:
         print(f"Failed to fetch remote config: {e}")
+    bundled = Path(__file__).resolve().parent / "app_config.json"
+    if bundled.exists():
+        try:
+            return json.loads(bundled.read_text())
+        except Exception:
+            pass
     return {}
 
 
